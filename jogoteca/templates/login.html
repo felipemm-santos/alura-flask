@@ -3,7 +3,7 @@
   <h1>Login</h1>
 </div>
 
-<form action="/authentication" method="post">
+<form action="{{ url_for('authentication') }}" method="post">
   <input type="hidden" name="next" id="next" value="{{next}}" />
   <fieldset>
     <div class="form-group">
