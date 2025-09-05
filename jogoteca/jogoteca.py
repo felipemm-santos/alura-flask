@@ -11,8 +11,12 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 
-game1= Game('Tetris', 'Puzzle', 'Atari')
-game2= Game('God of War', 'Rack n Slash', 'PS2')
+user1 = User('admin', 'rtm')
+user2 = User('user', '123')
+userList = {user1.username: user1, user2.username: user2}
+
+game1 = Game('Tetris', 'Puzzle', 'Atari')
+game2 = Game('God of War', 'Rack n Slash', 'PS2')
 gameList = [game1, game2]
 
 @app.route('/index')
@@ -50,7 +54,7 @@ def authentication( ):
     user = userList[request.form['username']]
     
     if user.password == request.form['password']:
-        session['logged_user'] = request.form['username']
+        session['logged_user'] = user.username
         flash('Usuário logado com sucesso', 'success')
         next_page = request.form['next']
         return redirect(next_page if next_page else url_for('home'))
